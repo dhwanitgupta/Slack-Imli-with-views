@@ -1,0 +1,32 @@
+<h1>Messages</h1>
+
+<ul class="users">
+   <% for message in @totalMessaage %> 
+
+    <div class="row">
+      <aside class="col-md-4">
+        <section class="user_info">
+           <%= User.find(message.sender_id).name %> : 
+           <h1>
+             <%= message.content %>
+          </h1>
+        </section>
+      </aside>
+    </div>
+  <%end%>
+</ul>
+
+<%= form_for(:message, url: "/messages_from_user") do |f| %>
+
+  <%= hidden_field_tag :sender_id, current_user.id %>
+  <%= hidden_field_tag :reciever_id, @reciever_id%>
+
+    <p>
+      <%= f.label :content %><br>
+      <%= f.text_field :content %>
+    </p>
+
+    <p>
+      <%= f.submit "Send", class: "btn btn-primary" %>
+    </p>
+<% end %>

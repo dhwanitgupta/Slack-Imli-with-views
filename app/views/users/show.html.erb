@@ -1,0 +1,49 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
+
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        Your Channels
+      </h1>
+    </section>
+  </aside>
+</div>
+<% channels = @user.channels %>
+
+<% for channel in channels %>
+
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= link_to channel.title, messages_for_channel_path(:id => channel.id)%>
+      </h1>
+    </section>
+  </aside>
+</div>
+
+<%end%>
+
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        Your Freinds
+      </h1>
+    </section>
+  </aside>
+</div><% for user in @users %>
+<%= link_to user.name , messages_from_user_path(:id => user.id) %>
+<br>
+<%end%>
